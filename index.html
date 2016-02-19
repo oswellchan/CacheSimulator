@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Cache Simulator</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-md-8 col-md-offset-2">
+				<div id="output" class="panel panel-default">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-6 col-md-offset-3">
+				<div class="panel panel-default">
+  					<div class="panel-heading">Simulate Cache</div>
+  						<div class="panel-body">
+    						<fieldset id="calculate-i">
+    							<legend>
+    								<strong>Calculate i with:</strong>
+    							</legend>
+    							<div class="row form-group">
+    								<div class="col-xs-4">
+    									<input type="number" id="i-start" class="form-control" name="i-start" placeholder="Start">
+   									</div>
+   									<div class="col-xs-4">
+   										<input type="number" id="i-end" class="form-control" name="i-end" placeholder="End">
+   									</div>
+    								<div class="col-xs-4">
+    									<input type="number" id="i-increment" class="form-control" name="i-increment" placeholder="Increment">
+    								</div>
+    							</div>
+    						</fieldset>
+    						<fieldset id="instructions">
+    							<legend>
+    								<strong>Instructions</strong>
+    							</legend>
+    							<div id="instructions-input">
+    								<div class="row form-group instruction-entry">
+										<div class="col-xs-10">
+								    		<div class="input-group">
+								      			<div class="input-group-btn">
+									        		<button type="button" class="btn btn-primary dropdown-toggle action" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Read <span class="caret"></span></button>
+									        		<ul class="dropdown-menu">
+									       				<li><a href="#" onclick="return false;">Read </a></li>
+								        				<li><a href="#" onclick="return false;">Write </a></li>
+									       			</ul>
+								     			</div><!-- /btn-group -->
+								     			<input type="text" id="instr-eq" class="form-control" name="instruction-eq" placeholder="e.g. i + 2">
+								      			<span class="input-group-addon">* 4</span>
+								    		</div><!-- /input-group -->
+										</div><!-- /.col-lg-6 -->
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="center">
+											<div class="form-group">
+											<button type="button" class="btn btn-success btn-add-instr">
+												Add Instruction
+											</button>
+											<button type="button" class="btn btn-info btn-run-instr">
+												Run
+											</button>
+											</div>
+										</div>
+									</div>
+								</div>
+    						</fieldset>
+  						</div>
+  					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/jquery-2.2.0.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/math.min.js"></script>
+	<script src="js/script.js"></script>
+</body>
+</html>
