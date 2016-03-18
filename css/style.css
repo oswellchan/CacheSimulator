@@ -10,3 +10,27 @@ input[type=number]::-webkit-outer-spin-button {
   display: table;
   margin: 0 auto;
 }
+
+.small-input {
+	width: 30%;
+}
+
+.n-way-group > label > div, .n-way-group > label > input {
+	display: inline-block;
+}
+
+.inline {
+	vertical-align: middle;
+}
+
+.big-line {
+	line-height: 3;
+}
+
+label {
+	font-weight: 200;
+}
+
+.fieldset-row{
+	margin-bottom: 5%;
+}

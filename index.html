@@ -18,67 +18,154 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-12 col-md-6 col-md-offset-3">
-				<div class="panel panel-default">
-  					<div class="panel-heading">Simulate Cache</div>
-  						<div class="panel-body">
-    						<fieldset id="calculate-i">
-    							<legend>
-    								<strong>Calculate i with:</strong>
-    							</legend>
-    							<div class="row form-group">
-    								<div class="col-xs-4">
-    									<input type="number" id="i-start" class="form-control" name="i-start" placeholder="Start">
-   									</div>
-   									<div class="col-xs-4">
-   										<input type="number" id="i-end" class="form-control" name="i-end" placeholder="End">
-   									</div>
-    								<div class="col-xs-4">
-    									<input type="number" id="i-increment" class="form-control" name="i-increment" placeholder="Increment">
-    								</div>
-    							</div>
-    						</fieldset>
-    						<fieldset id="instructions">
-    							<legend>
-    								<strong>Instructions</strong>
-    							</legend>
-    							<div id="instructions-input">
-    								<div class="row form-group instruction-entry">
-										<div class="col-xs-10">
-								    		<div class="input-group">
-								      			<div class="input-group-btn">
-									        		<button type="button" class="btn btn-primary dropdown-toggle action" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Read <span class="caret"></span></button>
-									        		<ul class="dropdown-menu">
-									       				<li><a href="#" onclick="return false;">Read </a></li>
-								        				<li><a href="#" onclick="return false;">Write </a></li>
-									       			</ul>
-								     			</div><!-- /btn-group -->
-								     			<input type="text" id="instr-eq" class="form-control" name="instruction-eq" placeholder="e.g. i + 2">
-								      			<span class="input-group-addon">* 4</span>
-								    		</div><!-- /input-group -->
-										</div><!-- /.col-lg-6 -->
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-xs-12">
-										<div class="center">
-											<div class="form-group">
-											<button type="button" class="btn btn-success btn-add-instr">
-												Add Instruction
-											</button>
-											<button type="button" class="btn btn-info btn-run-instr">
-												Run
-											</button>
-											</div>
-										</div>
-									</div>
-								</div>
-    						</fieldset>
-  						</div>
-  					</div>
+			<div class="col-xs-12 col-md-8 col-md-offset-2">
+				<div id="display">
+					<svg width="800" height="400">
+					</svg>
 				</div>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="col-xs-12 col-md-8 col-md-offset-2">
+				<div class="center">
+					<div class="form-group">
+						<!-- Button trigger modal -->
+						<button type="button" id="instr-modal-btn" class="btn btn-primary" data-toggle="modal" data-target="#instructions-modal">
+						  Add Instructions
+						</button>
+						<button type="button" id="conf-mem-btn" class="btn btn-primary" data-toggle="modal" data-target="#memory-modal">
+						  Configure Memory
+						</button>
+						<button type="button" class="btn btn-info btn-run-instr">Run</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="instructions-modal" tabindex="-1" role="dialog">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h3 class="modal-title"><strong>Add Instructions</strong></h3>
+		      </div>
+		      <div class="modal-body">
+		        <fieldset id="calculate-i" class="fieldset-row">
+  						<legend>
+  							<h4><b>Calculate i with:</b></h4>
+  						</legend>
+  						<div class="row form-group">
+  							<div class="col-xs-4">
+  								<p><b>Start:</b></p>
+  								<input type="number" id="i-start" class="form-control" name="i-start" placeholder="Start">
+ 								</div>
+ 								<div class="col-xs-4">
+ 									<p><b>End:</b></p>
+ 									<input type="number" id="i-end" class="form-control" name="i-end" placeholder="End">
+ 								</div>
+  							<div class="col-xs-4">
+  								<p><b>Step:</b></p>
+  								<input type="number" id="i-increment" class="form-control" name="i-increment" placeholder="Step">
+  							</div>
+  						</div>
+  					</fieldset>
+  					<fieldset id="instructions">
+  						<legend>
+  							<h4><b>Instructions</b></h4>
+  						</legend>
+  						<div id="instructions-input">
+							</div>
+  					</fieldset>
+		      </div>
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-success btn-add-instr">Add Instruction</button>
+		        <button type="button" class="btn btn-info btn-save-instr" data-dismiss="modal">Save changes</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		<div class="modal fade" id="memory-modal" tabindex="-1" role="dialog">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h3 class="modal-title"><strong>Configure Memory</strong></h3>
+		      </div>
+		      <div class="modal-body">
+		        <fieldset id="memory-conf" class="fieldset-row">
+  						<legend>
+  							<h4><b>Memory</b></h4>
+  						</legend>
+  						<div class="row form-group">
+  							<div class="col-xs-4">
+  								<p><b>Memory Size:</b></p>
+  								<input type="number" id="mem-size" class="form-control" name="mem-size" placeholder="Memory Size">
+ 								</div>
+ 								<div class="col-xs-4">
+ 									<p><b>Block Size:</b></p>
+ 									<input type="number" id="mem-block-size" class="form-control" name="mem-block-size" placeholder="Block Size">
+ 								</div>
+  						</div>
+  					</fieldset>
+  					<fieldset id="cache-conf">
+  						<legend>
+  							<h4><b>Cache</b></h4>
+  						</legend>
+  						<div class="row form-group">
+  							<div class="col-xs-4">
+  								<p><b>Cache Size:</b></p>
+  								<input type="number" id="cache-size" class="form-control" name="cache-size" placeholder="Cache Size">
+ 								</div>
+  						</div>
+
+  						<div><b>Organisation Scheme:</b></div>
+
+  						<div class="row form-group big-line">
+  							<div class="col-xs-3 inline">
+  								<div class="n-way-group">
+										<label><input type="radio" name="cache-scheme"> Direct Map</label>
+									</div>
+ 								</div>
+ 								<div class="col-xs-3 inline">
+ 									<div class="n-way-group">
+										<label><input type="radio" name="cache-scheme">
+											<input type="number" id="n-way-size" class="form-control small-input" name="n-way-size" placeholder="N"> 
+											<div class="way">
+											-way
+											</div>
+										</label>
+									</div>
+ 								</div>
+ 								<div class="col-xs-4 inline">
+									<label><input type="radio" name="cache-scheme"> Fully Associative</label>
+ 								</div>
+  						</div>
+
+  						<div><b>Replacement Scheme:</b></div>
+
+  						<div class="row form-group">
+  							<div class="col-xs-4 inline">
+  								<div class="n-way-group">
+										<label><input type="radio" name="replacement-scheme"> Least Recently Used</label>
+									</div>
+ 								</div>
+ 								<div class="col-xs-4 inline">
+									<label><input type="radio" name="replacement-scheme"> Second Choice</label>
+ 								</div>
+  						</div>
+
+  					</fieldset>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-info">Save changes</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 	</div>
 
 	<script src="js/jquery-2.2.0.min.js"></script>
