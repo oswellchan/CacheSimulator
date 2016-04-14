@@ -39,23 +39,36 @@ var INSTRUCTION_ROW_HTML_5 = '>'
 var INSTRUCTION_ROW_HTML_6 = '</div>';
 
 var instr_array = new Array();
+var processed_instr_array = new Array();
+var environment;
 
 $( document ).ready(function() {
-
-	//Variables
+	//Initialising default variables
+	//For instructions
 	var i_start = 1;
 	var i_end = 5;
 	var i_increment = 1;
-
 	var numRow = 1;
 
 	var firstInstr = {
     			type: READ,
-    			expr: '',
-    			base: ''
+    			expr: 'i + 2',
+    			base: '2'
     		};
 
 	instr_array.push(firstInstr);
+
+	//For memory variables
+	var mem_size = 1600;
+	var block_size = 4;
+	var cache_size = 16;
+	var n_way = 2;
+	var isDirectMap = true;
+	var isNway = false;
+	var isFullAssoc = false;
+	var isLRU = true;
+	var isSecondChoice = false;
+
 
 	$(document).on('click', '#instr-modal-btn', function() {
 		$("#i-start").val(i_start);
@@ -70,6 +83,33 @@ $( document ).ready(function() {
 			var instr = instr_array[i];
 			addInstructionRow(target, instr.type, instr.expr, instr.base, isAddDel);
 		}
+	});
+
+	$(document).on('click', '#conf-mem-btn', function() {
+		$("#mem-size").val(mem_size);
+    	$("#mem-block-size").val(block_size);
+    	$("#cache-size").val(cache_size);
+    	$("#n-way-size").val(n_way);
+
+    	if (isDirectMap) {
+    		$("#direct-map").prop("checked", true);
+    	}
+
+    	if (isNway) {
+    		$("#n-way").prop("checked", true);
+    	}
+
+    	if (isFullAssoc) {
+    		$("#full-assoc").prop("checked", true);
+    	}
+    	
+    	if (isLRU) {
+    		$("#lru").prop("checked", true);
+    	}
+
+    	if (isSecondChoice) {
+    		$("#second-choice").prop("checked", true);
+    	}
 	});
 
 	$(document).on('click', '.dropdown-menu li a', function() {
@@ -125,37 +165,72 @@ $( document ).ready(function() {
     	}
  	});
 
+ 	$(document).on('click', '#btn-save-mem-conf', function() {
+		mem_size = $("#mem-size").val();
+    	block_size = $("#mem-block-size").val();
+    	cache_size = $("#cache-size").val();
+    	n_way = $("#n-way-size").val();
+
+    	if ($("#direct-map").prop("checked")) {
+    		isDirectMap = true;
+    		isNway = false;
+    		isFullAssoc = false;
+    	}
+
+    	if ($("#n-way").prop("checked")) {
+    		isNway = true;
+    		isDirectMap = false;
+    		isFullAssoc = false;
+    	}
+
+    	if ($("#full-assoc").prop("checked")) {
+    		isFullAssoc = true;
+    		isNway = false;
+    		isDirectMap = false;
+    	}
+
+    	if ($("#lru").prop("checked")) {
+    		isLRU = true;
+    		isSecondChoice = false;
+    	}
+
+    	if ($("#second-choice").prop("checked")) {
+    		isSecondChoice = true;
+    		isLRU = false;
+    	}
+	});
+
  	$(document).on('click', '.btn-run-instr', function() {
-    	i_start = parseInt($("#i-start").val());
-    	i_end = parseInt($("#i-end").val());
-    	i_increment = parseInt($("#i-increment").val());
-
-    	var instructions = $(".instruction-entry");
-    	instr_array = new Array();
-    	for (j = 0; j < instructions.length; j++) {
-    		var instrType = $(instructions[j]).find(".action").text();
-    		var base = $(instructions[j]).find(".instr-base").val();
-    		console.log("(" + $(instructions[j]).find(".instr-eq").val() + ") * 4 + " + base + " * 4");
-    		var eq = math.compile("(" + $(instructions[j]).find(".instr-eq").val() + ") * 4 + " + base + " * 4");
-    		var instr = {
-    			type: instrType,
-    			expr: eq
+    	var compiled_instr_array = new Array();
+    	for (i = 0; i< instr_array.length; i++) {
+            var instr = instr_array[i];
+    		var eq = math.compile("(" + instr.expr + ") * 4 + (" + instr.base + " * 4)");
+    		var compiled_instr = {
+    			type: instr.type,
+    			compiledEq: eq
     		};
-    		instr_array.push(instr);
+    		compiled_instr_array.push(compiled_instr);
     	}
 
-    	for (k = i_start; k < i_end; k += i_increment) {
-    		var output = "i = " + k + "<br>";
-    		var scope = {
-    			i: k
-    		}
-    		for (j = 0; j < instr_array.length; j++) {
-    			var instr = instr_array[j];
-    			output += (j + ": " + instr.type + " " + instr.expr.eval(scope) + "<br>");
-    		}
-    		output += "<br>";
-    		$("#output").append(output);
-    	}
+        var count = 0;
+        for (i = i_start; i <= i_end; i += i_increment) {
+            var loop = new Array();
+            for (j = 0; j < compiled_instr_array.length; j++) {
+                var compiled_instr = compiled_instr_array[j];
+                var scope = {i: i};
+                var eval_instr = {
+                    type: compiled_instr.type,
+                    address: compiled_instr.compiledEq.eval(scope)
+                };
+                loop.push(eval_instr);
+            }
+            processed_instr_array[count] = loop;
+            count++;
+        }
+
+        $('#display').html('<svg class="center" width="1000" height="740"></svg>');
+        environment = createEnvironment(mem_size, block_size, cache_size, n_way, isDirectMap, isNway, isFullAssoc, isLRU, isSecondChoice, processed_instr_array);
+        environment.intialise();
  	});
 });
 

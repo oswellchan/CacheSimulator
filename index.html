@@ -12,17 +12,9 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12 col-md-8 col-md-offset-2">
-				<div id="output" class="panel panel-default">
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 col-md-8 col-md-offset-2">
-				<div id="display">
-					<svg width="800" height="400">
-					</svg>
-				</div>
+			<div class="col-xs-12" id="display">
+				<svg class="center" width="1000" height="740">
+				</svg>
 			</div>
 		</div>
 
@@ -102,11 +94,17 @@
   						<div class="row form-group">
   							<div class="col-xs-4">
   								<p><b>Memory Size:</b></p>
-  								<input type="number" id="mem-size" class="form-control" name="mem-size" placeholder="Memory Size">
+  								<div class="input-group">
+  									<input type="number" id="mem-size" class="form-control" name="mem-size" placeholder="Memory Size">
+  									<span class="input-group-addon">bytes</span>
+  								</div>
  								</div>
  								<div class="col-xs-4">
  									<p><b>Block Size:</b></p>
- 									<input type="number" id="mem-block-size" class="form-control" name="mem-block-size" placeholder="Block Size">
+ 									<div class="input-group">
+ 										<input type="number" id="mem-block-size" class="form-control" name="mem-block-size" placeholder="Block Size">
+ 										<span class="input-group-addon">bytes</span>
+ 									</div>
  								</div>
   						</div>
   					</fieldset>
@@ -117,7 +115,10 @@
   						<div class="row form-group">
   							<div class="col-xs-4">
   								<p><b>Cache Size:</b></p>
-  								<input type="number" id="cache-size" class="form-control" name="cache-size" placeholder="Cache Size">
+  								<div class="input-group">
+  									<input type="number" id="cache-size" class="form-control" name="cache-size" placeholder="Cache Size">
+  									<span class="input-group-addon">bytes</span>
+  								</div>
  								</div>
   						</div>
 
@@ -126,12 +127,12 @@
   						<div class="row form-group big-line">
   							<div class="col-xs-3 inline">
   								<div class="n-way-group">
-										<label><input type="radio" name="cache-scheme"> Direct Map</label>
+										<label><input type="radio" id="direct-map" name="cache-scheme"> Direct Map</label>
 									</div>
  								</div>
  								<div class="col-xs-3 inline">
  									<div class="n-way-group">
-										<label><input type="radio" name="cache-scheme">
+										<label><input type="radio" id="n-way" name="cache-scheme">
 											<input type="number" id="n-way-size" class="form-control small-input" name="n-way-size" placeholder="N"> 
 											<div class="way">
 											-way
@@ -140,7 +141,7 @@
 									</div>
  								</div>
  								<div class="col-xs-4 inline">
-									<label><input type="radio" name="cache-scheme"> Fully Associative</label>
+									<label><input type="radio" id="full-assoc" name="cache-scheme"> Fully Associative</label>
  								</div>
   						</div>
 
@@ -149,18 +150,18 @@
   						<div class="row form-group">
   							<div class="col-xs-4 inline">
   								<div class="n-way-group">
-										<label><input type="radio" name="replacement-scheme"> Least Recently Used</label>
+										<label><input type="radio" id="lru" name="replacement-scheme"> Least Recently Used</label>
 									</div>
  								</div>
  								<div class="col-xs-4 inline">
-									<label><input type="radio" name="replacement-scheme"> Second Choice</label>
+									<label><input type="radio" id="second-choice" name="replacement-scheme"> Second Choice</label>
  								</div>
   						</div>
 
   					</fieldset>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-info">Save changes</button>
+		        <button type="button" id="btn-save-mem-conf" class="btn btn-info" data-dismiss="modal">Save changes</button>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		      </div>
 		    </div><!-- /.modal-content -->
@@ -171,6 +172,8 @@
 	<script src="js/jquery-2.2.0.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/math.min.js"></script>
+	<script src="js/d3.min.js"></script>
 	<script src="js/script.js"></script>
+	<script src="js/cache.js"></script>
 </body>
 </html>

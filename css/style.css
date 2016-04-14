@@ -12,7 +12,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .small-input {
-	width: 30%;
+	width: 40%;
 }
 
 .n-way-group > label > div, .n-way-group > label > input {
@@ -33,4 +33,40 @@ label {
 
 .fieldset-row{
 	margin-bottom: 5%;
+}
+
+svg g .instr-Read {
+  stroke-width: 3;
+  stroke: black;
+  fill: turquoise;
+}
+
+svg g .instr-Write {
+  stroke-width: 3;
+  stroke: black;
+  fill: orange;
+}
+
+
+svg g .instr-header {
+  stroke-width: 3;
+  stroke: black;
+  fill: lightgray;
+}
+
+svg g .instr-address {
+  stroke-width: 3;
+  stroke: black;
+  fill: white;
+}
+
+svg g text {
+  fill: black;
+  font: 14px sans-serif;
+  text-anchor: middle;
+}
+
+.highlight {
+	fill-opacity: 0.6 !important;
+	fill: yellow !important;
 }
