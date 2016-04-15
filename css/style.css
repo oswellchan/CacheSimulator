@@ -48,10 +48,10 @@ svg g .instr-Write {
 }
 
 
-svg g .instr-header {
+svg g rect {
   stroke-width: 3;
   stroke: black;
-  fill: lightgray;
+  fill: white;
 }
 
 svg g .instr-address {
@@ -64,6 +64,48 @@ svg g text {
   fill: black;
   font: 14px sans-serif;
   text-anchor: middle;
+}
+
+svg #cache text {
+  fill: black;
+  font: 12px sans-serif;
+  text-anchor: middle;
+}
+
+svg g .cache-header {
+	stroke-width: 3;
+  	stroke: black;
+  	fill: lightgray;
+}
+
+svg g .instr-header {
+	stroke-width: 3;
+  	stroke: black;
+  	fill: lightgray;
+}
+
+svg g .block-header {
+	stroke-width: 3;
+  	stroke: black;
+  	fill: gray;
+}
+
+svg g .working {
+  fill: black;
+  font: 12px sans-serif;
+  text-anchor: start;
+}
+
+svg g .instr-header {
+  stroke-width: 3;
+  stroke: black;
+  fill: lightgray;
+}
+
+svg g .instr-cell-header {
+	stroke-width: 3;
+	stroke: black;
+	fill: lightgray;
 }
 
 .highlight {

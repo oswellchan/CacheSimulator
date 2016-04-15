@@ -1,52 +1,8 @@
-var READ = "Read ";
-var WRITE = "Write ";
-var DEL_BUTTON = '<div class="col-xs-1 btn-del-instr">'
-					+'<button type="button" class="btn btn-danger">'
-						+'<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>'
-					+'</button>'
-				+'</div>';
-
-var INSTRUCTION_ROW_HTML_1 = '<div class="row form-group instruction-entry">'
-								+'<div class="col-xs-6">'
-							   		+'<div class="input-group">'
-							      		+'<div class="input-group-btn">'
-								        	+'<button type="button" class="btn ';
-
-var INSTRUCTION_ROW_HTML_2 = ' dropdown-toggle action" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-
-var INSTRUCTION_ROW_HTML_3 = '<span class="caret"></span></button>'
-					        	+'<ul class="dropdown-menu">'
-					       			+'<li><a href="#" onclick="return false;">' + READ + '</a></li>'
-				        			+'<li><a href="#" onclick="return false;">' + WRITE + '</a></li>'
-					       		+'</ul>'
-				     		+'</div>'
-				     		+'<input type="text" class="form-control instr-eq" name="instruction-eq" placeholder="e.g. i + 2"';
-
-var INSTRUCTION_ROW_HTML_4 = '>'
-			      			+'<span class="input-group-addon">* 4</span>'
-				    	+'</div>'
-					+'</div>'
-					+'<div class="col-xs-4">'
-						+'<div class="input-group">'
-								+'<span class="input-group-addon">+</span>'
-								+'<input type="number" class="form-control instr-base" placeholder="Base"';
-
-var INSTRUCTION_ROW_HTML_5 = '>'
-							+'<span class="input-group-addon">* 4</span>'
-						+'</div>'
-					+'</div>';
-
-var INSTRUCTION_ROW_HTML_6 = '</div>';
-
-var instr_array = new Array();
-var processed_instr_array = new Array();
-var environment;
-
 $( document ).ready(function() {
 	//Initialising default variables
 	//For instructions
 	var i_start = 1;
-	var i_end = 5;
+	var i_end =8;
 	var i_increment = 1;
 	var numRow = 1;
 
@@ -61,7 +17,7 @@ $( document ).ready(function() {
 	//For memory variables
 	var mem_size = 1600;
 	var block_size = 4;
-	var cache_size = 16;
+	var cache_size = 64;
 	var n_way = 2;
 	var isDirectMap = true;
 	var isNway = false;
