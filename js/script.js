@@ -2,7 +2,7 @@ $( document ).ready(function() {
 	//Initialising default variables
 	//For instructions
 	var i_start = 1;
-	var i_end =8;
+	var i_end = 20;
 	var i_increment = 1;
 	var numRow = 1;
 
@@ -16,15 +16,16 @@ $( document ).ready(function() {
 
 	//For memory variables
 	var mem_size = 1600;
-	var block_size = 4;
+	var block_size = 16;
 	var cache_size = 64;
 	var n_way = 2;
-	var isDirectMap = true;
-	var isNway = false;
+	var isDirectMap = false;
+	var isNway = true;
 	var isFullAssoc = false;
 	var isLRU = true;
 	var isSecondChoice = false;
-
+    var isWriteAllocate = true;
+    var isWriteAround = false;
 
 	$(document).on('click', '#instr-modal-btn', function() {
 		$("#i-start").val(i_start);
@@ -66,6 +67,14 @@ $( document ).ready(function() {
     	if (isSecondChoice) {
     		$("#second-choice").prop("checked", true);
     	}
+
+        if (isWriteAllocate) {
+            $("#write-allocate").prop("checked", true);
+        }
+
+        if (isWriteAround) {
+            $("#write-around").prop("checked", true);
+        }
 	});
 
 	$(document).on('click', '.dropdown-menu li a', function() {
@@ -121,7 +130,28 @@ $( document ).ready(function() {
     	}
  	});
 
- 	$(document).on('click', '#btn-save-mem-conf', function() {
+ 	$(document).on('click', '#btn-save-mem-conf', function(event) {
+
+        if (!($("#mem-size").val() === 1600 || $("#mem-size").val() === 3200 || $("#mem-size").val() === 6400)) {
+            event.preventDefault();
+            return false;
+        }
+
+        if (!( $("#mem-block-size").val() === 4 ||  $("#mem-block-size").val() === 8 ||  $("#mem-block-size").val() === 16)) {
+            event.preventDefault();
+            return false;
+        }
+
+        if (!($("#cache-size").val() === 16 || $("#cache-size").val() === 32 || $("#cache-size").val() === 64)) {
+            event.preventDefault();
+            return false;
+        }
+
+        if (!($("#n-way").val() === 2 || $("#n-way").val() === 4) {
+            event.preventDefault();
+            return false;
+        }        
+
 		mem_size = $("#mem-size").val();
     	block_size = $("#mem-block-size").val();
     	cache_size = $("#cache-size").val();
@@ -154,6 +184,16 @@ $( document ).ready(function() {
     		isSecondChoice = true;
     		isLRU = false;
     	}
+
+        if ($("#write-around").prop("checked")) {
+            isWriteAround = true;
+            isWriteAllocate = false;
+        }
+
+        if ($("#write-allocate").prop("checked")) {
+            isWriteAllocate = true;
+            isWriteAround = false;
+        }
 	});
 
  	$(document).on('click', '.btn-run-instr', function() {
@@ -168,6 +208,7 @@ $( document ).ready(function() {
     		compiled_instr_array.push(compiled_instr);
     	}
 
+        processed_instr_array = new Array();
         var count = 0;
         for (i = i_start; i <= i_end; i += i_increment) {
             var loop = new Array();
@@ -185,7 +226,7 @@ $( document ).ready(function() {
         }
 
         $('#display').html('<svg class="center" width="1000" height="740"></svg>');
-        environment = createEnvironment(mem_size, block_size, cache_size, n_way, isDirectMap, isNway, isFullAssoc, isLRU, isSecondChoice, processed_instr_array);
+        environment = createEnvironment(mem_size, block_size, cache_size, n_way, isDirectMap, isNway, isFullAssoc, isLRU, isSecondChoice, processed_instr_array, isWriteAllocate, isWriteAround);
         environment.intialise();
  	});
 });
