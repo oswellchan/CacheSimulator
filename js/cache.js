@@ -807,7 +807,7 @@ function activateInstruction(type, addressInBin) {
 			if (tag === cacheTag) {
 				environment.cacheHit++;
 				if (type === WRITE) {
-					cache.cache[index][WORD_OFFSET + bin2dec(addressInBin[2].substring(0, 2))] += '\'';
+					cache.cache[index][WORD_OFFSET + bin2dec(addressInBin[2].substring(0, addressInBin[2].length - 2))] += '\'';
 				}
 				renderCache();
 				return;
@@ -832,7 +832,7 @@ function activateInstruction(type, addressInBin) {
 		}
 
 		if (type === WRITE && environment.isWriteAllocate) {
-			cache.cache[index][WORD_OFFSET + bin2dec(addressInBin[2].substring(0, 2))] += '\'';
+			cache.cache[index][WORD_OFFSET + bin2dec(addressInBin[2].substring(0, addressInBin[2].length - 2))] += '\'';
 		}
 
 		renderCache();
@@ -855,7 +855,7 @@ function activateInstruction(type, addressInBin) {
 					//hightlight green
 					environment.cacheHit++;
 					if (type === WRITE) {
-						cacheRepresentation[i][WORD_OFFSET + bin2dec(addressInBin[2].substring(0, 2))] += '\'';
+						cacheRepresentation[i][WORD_OFFSET + bin2dec(addressInBin[2].substring(0, addressInBin[2].length - 2))] += '\'';
 					}
 
 					if (environment.cache.isLRU) {
@@ -925,7 +925,7 @@ function activateInstruction(type, addressInBin) {
 		}
 
 		if (type === WRITE && environment.isWriteAllocate) {
-			cache.cache[indexToInsert][WORD_OFFSET + bin2dec(addressInBin[2].substring(0, 2))] += '\'';
+			cache.cache[indexToInsert][WORD_OFFSET + bin2dec(addressInBin[2].substring(0, addressInBin[2].length - 2))] += '\'';
 		}
 
 		renderCache();
@@ -947,7 +947,7 @@ function activateInstruction(type, addressInBin) {
 				if (tag === cacheTag) {
 					environment.cacheHit++;
 					if (type === WRITE) {
-						block[WORD_OFFSET + bin2dec(addressInBin[2].substring(0, 2))] += '\'';
+						block[WORD_OFFSET + bin2dec(addressInBin[2].substring(0, addressInBin[2].length - 2))] += '\'';
 					}
 					if (environment.cache.isLRU) {
 						var recentlyUsed = environment.cache.recentlyUsed[index];
@@ -1014,7 +1014,7 @@ function activateInstruction(type, addressInBin) {
 		}
 
 		if (type === WRITE && environment.isWriteAllocate) {
-			set[indexToInsert][WORD_OFFSET + bin2dec(addressInBin[2].substring(0, 2))] += '\'';
+			set[indexToInsert][WORD_OFFSET + bin2dec(addressInBin[2].substring(0, addressInBin[2].length - 2))] += '\'';
 		}
 
 		renderCache();
@@ -1263,7 +1263,7 @@ function bin2dec(bin) {
 	var result = 0;
 
 	if (array.length === 0) {
-		return;
+		return 0;
 	}
 
 	for (i = 0; i < array.length; i++) {
