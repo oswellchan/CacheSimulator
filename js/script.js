@@ -132,22 +132,22 @@ $( document ).ready(function() {
 
  	$(document).on('click', '#btn-save-mem-conf', function(event) {
 
-        if (!($("#mem-size").val() === 1600 || $("#mem-size").val() === 3200 || $("#mem-size").val() === 6400)) {
+        if (!($("#mem-size").val() == 1600 || $("#mem-size").val() == 3200 || $("#mem-size").val() == 6400)) {
             event.preventDefault();
             return false;
         }
 
-        if (!( $("#mem-block-size").val() === 4 ||  $("#mem-block-size").val() === 8 ||  $("#mem-block-size").val() === 16)) {
+        if (!( $("#mem-block-size").val() == 4 ||  $("#mem-block-size").val() == 8 ||  $("#mem-block-size").val() == 16)) {
             event.preventDefault();
             return false;
         }
 
-        if (!($("#cache-size").val() === 16 || $("#cache-size").val() === 32 || $("#cache-size").val() === 64)) {
+        if (!($("#cache-size").val() == 16 || $("#cache-size").val() == 32 || $("#cache-size").val() == 64)) {
             event.preventDefault();
             return false;
         }
 
-        if (!($("#n-way").val() === 2 || $("#n-way").val() === 4) {
+        if (!($("#n-way-size").val() == 2 || $("#n-way-size").val() == 4)) {
             event.preventDefault();
             return false;
         }        
