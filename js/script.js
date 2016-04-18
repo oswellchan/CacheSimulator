@@ -219,7 +219,10 @@ $( document ).ready(function() {
                     type: compiled_instr.type,
                     address: compiled_instr.compiledEq.eval(scope)
                 };
-                loop.push(eval_instr);
+
+                if (eval_instr.address <= mem_size) {
+                    loop.push(eval_instr);
+                }
             }
             processed_instr_array[count] = loop;
             count++;
